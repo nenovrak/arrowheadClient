@@ -232,7 +232,7 @@ private boolean isOpen = false;
                     props = Utility.getProp();
                     Utility.setSSLContext(sslCon.createSSLContext(true));
                 }
-            break
+            break;
             }
         }
         
