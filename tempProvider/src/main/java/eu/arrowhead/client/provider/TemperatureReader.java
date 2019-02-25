@@ -13,7 +13,7 @@ public class TemperatureReader{
     
       for(TemperatureSensor device : w1Master.getDevices(TemperatureSensor.class)){	      
           
-          if(device.getName().contains("28-0000093012c1")){  //Makes sure the device is the temperature sensor
+          if(device.getName().contains("28-")){  //Makes sure the device is the temperature sensor
               return device.getTemperature(TemperatureScale.CELSIUS);
           }
           
