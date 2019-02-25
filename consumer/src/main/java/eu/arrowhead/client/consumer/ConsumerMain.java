@@ -57,8 +57,23 @@ public class ConsumerMain {
     ServiceRequestForm servoSRF = compileSRF("Servo");
 
     //Sending the orchestration request and parsing the response
-    String tempUrl = sendOrchestrationRequest(tempSRF);
-    String servoUrl = sendOrchestrationRequest(servoSRF);
+    String tempUrl;
+    String servoUrl;
+     //prevent consumer from crashing when no provider is registred
+    while(true){
+      try{
+        tempUrl = sendOrchestrationRequest(tempSRF);
+        servoUrl = sendOrchestrationRequest(servoSRF);
+        break;
+      }catch(Exception e){
+        try{
+          Thread.sleep(2000);
+        }catch(Exception ex){
+          ex.printStackTrace();
+        }
+      }
+      
+    }
 
     //Connect to the provider, consuming its service - THIS METHOD SHOULD BE MODIFIED ACCORDING TO YOUR USE CASE
     try {
