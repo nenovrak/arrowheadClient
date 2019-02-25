@@ -8,12 +8,18 @@ import com.pi4j.temperature.TemperatureScale;
 public class TemperatureReader{
   
   public double readTemperature(){
-    W1Master w1Master = new W1Master();
-    for(TemperatureSensor device : w1Master.getDevices(TemperatureSensor.class)){
-	if(device.getName().contains("28-0000093012c1"))
-		return device.getTemperature(TemperatureScale.CELSIUS);
-    }
-    return 0;
+   
+      W1Master w1Master = new W1Master();
+    
+      for(TemperatureSensor device : w1Master.getDevices(TemperatureSensor.class)){	      
+          
+          if(device.getName().contains("28-0000093012c1")){  //Makes sure the device is the temperature sensor
+              return device.getTemperature(TemperatureScale.CELSIUS);
+          }
+          
+      }
+      
+      return 0;
   }
 
 }

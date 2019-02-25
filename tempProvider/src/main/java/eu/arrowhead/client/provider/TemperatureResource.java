@@ -25,35 +25,42 @@ import java.util.Random;
 @Produces(MediaType.APPLICATION_JSON)
 //REST service example
 public class TemperatureResource {
-
-  static final String SERVICE_URI = "temperature";
-  static Random r = new Random();
-  static TemperatureReader tempReader = new TemperatureReader();
-
-  @GET
-  @Path(SERVICE_URI)
-  public Response getIt(@Context SecurityContext context, @QueryParam("token") String token, @QueryParam("signature") String signature) {
-    String providerName;
-    if (context.isSecure()) {
-      RequestVerification.verifyRequester(context, token, signature);
-      providerName = "TemperatureSensors_SecureTemperatureSensor";
-    } else {
-      providerName = "TemperatureSensors_InsecureTemperatureSensor";
+    
+    static final String SERVICE_URI = "temperature";
+    static TemperatureReader tempReader = new TemperatureReader();
+    
+    @GET
+    @Path(SERVICE_URI)
+    public Response getIt(@Context SecurityContext context, @QueryParam("token") String token, @QueryParam("signature") String signature) {
+          
+        String providerName;
+          
+        if(context.isSecure()){
+            RequestVerification.verifyRequester(context, token, signature);
+            providerName = "TemperatureSensors_SecureTemperatureSensor";
+        }
+        else{
+            providerName = "TemperatureSensors_InsecureTemperatureSensor";
+        }
+    
+        /*if (FullProviderMain.customResponsePayload != null) {
+          return Response.status(200).entity(FullProviderMain.customResponsePayload).build();
+        } else {
+          MeasurementEntry entry = new MeasurementEntry("Temperature_IndoorTemperature", 21.0, System.currentTimeMillis());
+          TemperatureReadout readout = new TemperatureReadout(providerName, System.currentTimeMillis(), "celsius", 1);
+          readout.getE().add(entry);
+          return Response.status(200).entity(readout).build();
+        }*/
+          
+        double temp = tempReader.readTemperature(); //Reads the temperature from the sensor
+          
+        MeasurementEntry entry = new MeasurementEntry("Temperature_IndoorTemperature", temp, System.currentTimeMillis());
+          
+        TemperatureReadout readout = new TemperatureReadout(providerName, System.currentTimeMillis(), "celsius", 1);
+          
+        readout.getE().add(entry); //Adds the 'entry' to a list consisting of MeasurementEntry
+          
+        return Response.status(200).entity(readout).build();
     }
-
-    /*if (FullProviderMain.customResponsePayload != null) {
-      return Response.status(200).entity(FullProviderMain.customResponsePayload).build();
-    } else {
-      MeasurementEntry entry = new MeasurementEntry("Temperature_IndoorTemperature", 21.0, System.currentTimeMillis());
-      TemperatureReadout readout = new TemperatureReadout(providerName, System.currentTimeMillis(), "celsius", 1);
-      readout.getE().add(entry);
-      return Response.status(200).entity(readout).build();
-    }*/
-    double temp = tempReader.readTemperature();
-    MeasurementEntry entry = new MeasurementEntry("Temperature_IndoorTemperature", temp, System.currentTimeMillis());
-    TemperatureReadout readout = new TemperatureReadout(providerName, System.currentTimeMillis(), "celsius", 1);
-    readout.getE().add(entry);
-    return Response.status(200).entity(readout).build();
-  }
 
 }
