@@ -12,7 +12,7 @@
 
 ### Connecting the wires
 
-The connections we made are listed below. Refer to figure 1 to find what pins to connect to.
+The connections we made are listed below. Refer to Figure 1 to find what pins to connect to.
 
 - Temperature sensor power to pin 1, 3.3 VDC Power
 - Temperature sensor Ground to pin 6, Ground
