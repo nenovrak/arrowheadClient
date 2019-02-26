@@ -49,15 +49,15 @@ Notes:
 
 ### Some configurations that need to be made.
 
-1. Install xterm. `sudo apt install xterm`.
+1. Install xterm. `sudo apt install xterm`
 2. Enable 1-wire interface. Run `raspi-config` in your terminal, press 5 to select interfaces, select 1-wire and enable it.
 3. If you have set a root password you need to run `modprobe w1-gpio && modprobe w1-therm`, otherwise this will be done in the temperature provider code.
 
 ### Running the example
 
 1. Go to the *arrowheadClient/Scripts* repository in your terminal.
-2. Run the *start_ah_insecure.sh* script to start the framework. `./start_ah_insecure.sh`.
+2. Run the *start_ah_insecure.sh* script to start the framework. `./start_ah_insecure.sh`
 3. Run `systemctl | grep arrowhead` to make sure the framework is running. All six core systems should say "loaded active running". If this is not the case, repeat this step until it you get the desired output.
-4. Run our example with the command `./startUp.sh`.
+4. Run our example with the command `./startUp.sh`
 5. Three new terminal windows should pop up, and the example will shortly be running.
 6. To stop the example, it is very important that you write "stop" in the terminal window of both providers before you close their window. Otherwise they will not be unregistered from the service registy, and this will lead to problems when running the example again.
