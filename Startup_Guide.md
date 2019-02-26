@@ -25,6 +25,8 @@ The connections we made are listed below. Refer to figure 1 to find what pins to
 ![Authorization_crosscheck](Images/j8header-3b.png)
 *Figure 1: GPIO pinout using the Pi4J/WiringPi GPIO numbering scheme.*
 
+If something is unclear, there are pictures of how we connected our sensor and servo to the Raspberry Pi, [here](Images/).
+
 ## Setting up the software
 
 ### Installing Raspbian
