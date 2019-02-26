@@ -29,11 +29,11 @@ The connections we made are listed below. Refer to figure 1 to find what pins to
 
 ### Installing Raspbian
 
-Download "Raspbian Stretch with desktop and recommended software" from [https://www.raspberrypi.org/downloads/raspbian/](here), and follow the [https://www.raspberrypi.org/documentation/installation/installing-images/README.md](installation guide).
+Download "Raspbian Stretch with desktop and recommended software" from [here](https://www.raspberrypi.org/downloads/raspbian/), and follow the [installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
 
 ### Installing the the arrowhead framework
 
-Follow [https://github.com/arrowhead-f/core-java/blob/master/documentation/Debian%20Packages/Debian%20Install%20-%20Cutted.pdf](this) installation guide.
+Follow [this](https://github.com/arrowhead-f/core-java/blob/master/documentation/Debian%20Packages/Debian%20Install%20-%20Cutted.pdf) installation guide.
 
 Notes:
 - Make sure you select detached mode during installation.
