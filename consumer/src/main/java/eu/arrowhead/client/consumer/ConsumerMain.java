@@ -59,12 +59,19 @@ private boolean isOpen = false;
     //Sending the orchestration request and parsing the response
     String tempUrl;
     String servoUrl;
-     //prevent consumer from crashing when no provider is registred
+    
+    /*
+     * This piece of code below might be tricky to understand, and might also look pretty dumb. But what we actually wanted to accomplish with this
+     * is that the consumer should not crash with error messages, should the consumer start before the providers when we run the startUp.sh script.
+     * This works because when the consumer are trying to send an orchestration request to a non-started provider, an exception will occur. When we
+     * catch that exception, we will give the providers another 2000ms (2 seconds) to start up, and this process will be repeated over and over again
+     * until the providers have started up successfully, because then we will reach the 'break;' statement that exits the loop
+    */
     while(true){
       try{
         tempUrl = sendOrchestrationRequest(tempSRF);
         servoUrl = sendOrchestrationRequest(servoSRF);
-        break;
+        break;  //When reached, the providers have been started and the loop will be exited.
       }catch(Exception e){
         try{
           Thread.sleep(2000);
@@ -195,7 +202,7 @@ private boolean isOpen = false;
     
     /*
      * The controlServo-method is checking wheter or not the temperature is above 25 degrees or not, and if the valve is opened or closed.
-     * Depending on the temperature and the position of the valve, we send requests through the orchestrator to the servoProvider with the 
+     * Depending on the temperature and the position of the valve, we send requests to the servoProvider with the 
      * position we want the valve to be placed at (200 or 100).
      */
     

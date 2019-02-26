@@ -46,19 +46,10 @@ public class ServoResource {
       
       try{
         sm.moveServo(pos);      //Moves the servo to the given position
-      }
-      catch(Exception e){
-        System.out.println("error");
+      }catch(Exception e){
+        System.out.println("Error: The servo could not be moved");
       }
       
-      /*if (FullProviderMain.customResponsePayload != null) {
-          return Response.status(200).entity(FullProviderMain.customResponsePayload).build();
-      } else {
-        MeasurementEntry entry = new MeasurementEntry("Temperature_IndoorTemperature", 21.0, System.currentTimeMillis());
-        TemperatureReadout readout = new TemperatureReadout(providerName, System.currentTimeMillis(), "celsius", 1);
-        readout.getE().add(entry);
-        return Response.status(200).entity(readout).build();
-      }*/
     }
 
 }

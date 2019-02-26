@@ -42,15 +42,6 @@ public class TemperatureResource {
         else{
             providerName = "TemperatureSensors_InsecureTemperatureSensor";
         }
-    
-        /*if (FullProviderMain.customResponsePayload != null) {
-          return Response.status(200).entity(FullProviderMain.customResponsePayload).build();
-        } else {
-          MeasurementEntry entry = new MeasurementEntry("Temperature_IndoorTemperature", 21.0, System.currentTimeMillis());
-          TemperatureReadout readout = new TemperatureReadout(providerName, System.currentTimeMillis(), "celsius", 1);
-          readout.getE().add(entry);
-          return Response.status(200).entity(readout).build();
-        }*/
           
         double temp = tempReader.readTemperature(); //Reads the temperature from the sensor
           
