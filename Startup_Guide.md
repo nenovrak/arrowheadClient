@@ -43,7 +43,7 @@ Notes:
 
 ### Downloading and compiling our example
 
-1. Run the command `git clone https://github.com/MartinBrathen/arrowheadClient.git` from your terminal.
+1. Run the command `git clone https://github.com/MartinBrathen/arrowheadClient.git` from your terminal, inside your home folder. Our script will not work otherwise. The command `cd` with no arguments will send you to your home folder.
 2. Go to the *arrowheadClient* repository in your terminal.
 3. Use `mvn package` inside the arrowheadClient repository.
 
