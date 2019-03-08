@@ -171,15 +171,26 @@ private boolean isOpen = false;
           If needed, compile the request payload here, before sending the request.
           Supported method types at the moment: GET, POST, PUT, DELETE
         */
-        Response getResponse = Utility.sendRequest(providerUrl, "GET", null);
+	String indoorSensorId = "28-000009318dbc"; // Indoor
+	String outdoorSensorId = "28-80000026d935"; // Outdoor
+        Response getIndoorResponse = Utility.sendRequest(providerUrl + "/" + indoorSensorId , "GET", null);
+	double indoorTemp = parseResponse(getIndoorResponse, indoorSensorId);
+
+        Response getOutdoorResponse = Utility.sendRequest(providerUrl + "/" + outdoorSensorId , "GET", null);
+	double outdoorTemp = parseResponse(getOutdoorResponse, outdoorSensorId);
         
         /*
           Parsing the response from the provider here. This code prints an error message, if the answer is not in the expected JSON format, but custom
           error handling can also be implemented here. For example the Orchestrator will send back a JSON with the structure of the eu.arrowhead.client
           .common.exception.ErrorMessage class, and the errors from the Orchestrator are parsed this way.
         */
+	return outdoorTemp; // Dummy return since this is just for ...
         
-        TemperatureReadout readout = new TemperatureReadout();
+    }
+
+
+    private double parseResponse(Response getResponse, String sensorId) {
+         TemperatureReadout readout = new TemperatureReadout();
         
         try {
             readout = getResponse.readEntity(TemperatureReadout.class);
@@ -195,10 +206,12 @@ private boolean isOpen = false;
             return -1;
         } 
         else {
-            System.out.println("The indoor temperature is " + readout.getE().get(0).getV() + " degrees celsius.");
+            System.out.println("The temperature for sensor " + sensorId + " is " + readout.getE().get(0).getV() + " degrees celsius.");
             return readout.getE().get(0).getV();
         }
+   	
     }
+
     
     /*
      * The controlServo-method is checking wheter or not the temperature is above 25 degrees or not, and if the valve is opened or closed.

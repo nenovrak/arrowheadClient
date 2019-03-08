@@ -15,6 +15,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -30,8 +31,8 @@ public class TemperatureResource {
     static TemperatureReader tempReader = new TemperatureReader();
     
     @GET
-    @Path(SERVICE_URI)
-    public Response getIt(@Context SecurityContext context, @QueryParam("token") String token, @QueryParam("signature") String signature) {
+    @Path("temperature/{sensorId}")
+    public Response getIt(@Context SecurityContext context, @QueryParam("token") String token, @QueryParam("signature") String signature, @PathParam("sensorId") String sensorId) {
           
         String providerName;
           
@@ -43,7 +44,7 @@ public class TemperatureResource {
             providerName = "TemperatureSensors_InsecureTemperatureSensor";
         }
           
-        double temp = tempReader.readTemperature(); //Reads the temperature from the sensor
+        double temp = tempReader.readTemperature(sensorId); //Reads the temperature from the sensor
           
         MeasurementEntry entry = new MeasurementEntry("Temperature_IndoorTemperature", temp, System.currentTimeMillis());
           
